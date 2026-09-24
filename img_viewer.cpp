@@ -36,13 +36,36 @@ int main(){
     SDL_Rect pixel = {0,0,1,1};
     int k = 0;
     Uint32 color = 0;
-    for(int i = 0; i<height; i++){
-        for(int j = 0; j<width; j++){
-            color = SDL_MapRGB(my_sur->format, myvec[k], myvec[k+1], myvec[k+2]);
-            pixel = {j,i,1,1};
-            SDL_FillRect(my_sur, &pixel, color);
-            k+=3;
+    while(true){
+        cout<<"FOR GREYSCALE ENTER : 1, FOR COLOR ENTER : 2\n";
+        int a;
+        cin>>a;
+        int red, blue, green, grey;
+        if(a==1){
+            for(int i = 0; i<height; i++){
+                for(int j = 0; j<width; j++){
+                    red = myvec[k]; green = myvec[k+1]; blue = myvec[k+2];
+                    grey = red*0.299+green*0.587+blue*0.114;
+                    color = SDL_MapRGB(my_sur->format, grey, grey, grey);
+                    pixel = {j,i,1,1};
+                    SDL_FillRect(my_sur, &pixel, color);
+                    k+=3;
+                }
+            }
+            break;
         }
+        if(a==2){
+            for(int i = 0; i<height; i++){
+                for(int j = 0; j<width; j++){
+                    color = SDL_MapRGB(my_sur->format, myvec[k], myvec[k+1], myvec[k+2]);
+                    pixel = {j,i,1,1};
+                    SDL_FillRect(my_sur, &pixel, color);
+                    k+=3;
+                }
+            }
+            break;
+        }
+        else cout<<"PLEASE ENTER VALID INPUT\n";
     }
     SDL_UpdateWindowSurface(my_win);
     bool viewing = true;
