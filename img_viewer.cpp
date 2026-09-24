@@ -30,17 +30,22 @@ int main(){
     //myvec.data() return a pointer to the first element
 
 
+    
+    cout<<"FOR GREYSCALE ENTER : 1, FOR COLOR ENTER : 2\n";
+    int a;
+    cin>>a;
+    int red, blue, green, grey;
+    if(a!=1 && a!=2){
+        cout<<"PLEASE ENTER VALID INPUT \n";
+        return 0;
+    }
     SDL_Window *my_win =  SDL_CreateWindow("my_win",0,0,width,height,0);
     SDL_Surface *my_sur =  SDL_GetWindowSurface(my_win);
     // Uint32 color = SDL_MapRGB(my_sur->format, 255, 0, 0); //red
     SDL_Rect pixel = {0,0,1,1};
     int k = 0;
     Uint32 color = 0;
-    while(true){
-        cout<<"FOR GREYSCALE ENTER : 1, FOR COLOR ENTER : 2\n";
-        int a;
-        cin>>a;
-        int red, blue, green, grey;
+
         if(a==1){
             for(int i = 0; i<height; i++){
                 for(int j = 0; j<width; j++){
@@ -52,7 +57,6 @@ int main(){
                     k+=3;
                 }
             }
-            break;
         }
         if(a==2){
             for(int i = 0; i<height; i++){
@@ -63,10 +67,8 @@ int main(){
                     k+=3;
                 }
             }
-            break;
         }
-        else cout<<"PLEASE ENTER VALID INPUT\n";
-    }
+
     SDL_UpdateWindowSurface(my_win);
     bool viewing = true;
     while(viewing){
